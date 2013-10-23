@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript - Day 2</title>
+		<script>
+		
+			var greetings = ["hello","bonjour","s'up dude"];
+			var goodbyes = ["bye", "see you later", "another time", "au revoir", "bye bye", "peace out"];
+			var languages = [greetings, goodbyes];
+			
+			
+			//get the length of how many items are in goodbyes
+			var fancyNumber = goodbyes.length;
+
+			//subtract 1 from the number
+			var fancyNumber = fancyNumber - 1;
+		
+			
+			//use the variable as the "key" in the array
+			console.log(goodbyes[goodbyes.length - 1]);
+
+
+			//create an empty array of favorite foods
+			
+			var favoriteFoods = [];
+			//use "prompt" to ask for a favorite food
+			
+			var food = prompt("What's your favorite food?");
+			//add the user's response to the array
+			favoriteFoods.push(food);
+
+			favoriteFoods.push(prompt("Second favorite?"));
+
+			//output the whole array
+			console.log(favoriteFoods);
+				
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>
