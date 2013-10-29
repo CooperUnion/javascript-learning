@@ -5,13 +5,30 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script>
 			$(document).ready(function(){
-			
-				/* Standard Javascript goes here */
-			
+				$("#on").click(function(){
+					$("#light").addClass("on");
+				});
+				$("#off").click(function(){
+					$("#light").removeClass("on");
+				});	
+				
+				/*
+				$("#light").click(function(){
+					$("#light").toggleClass("on");
+				});			
+				*/
 			});
 		</script>
+		<style>
+			.on {
+				background-color:yellow;
+			}
+		</style>
 	</head>
 	<body>
-	
+		<div id="light">Light!</div>
+		<div id="on">ON</div>
+		<div id="off">OFF</div>
+
 	</body>
 </html>
