@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+				
+				
+				$("ul").click(function(){
+
+					var counter = $("li").length + 1;
+					var answer = "this is list item #" + counter;
+					$("ul").append("<li>"+answer+"</li>");
+					
+				});
+				
+				
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<ul>
+			<li>A list item</li>
+			<li>A second list item</li>
+			<li>A third item! Sneaky.</li>
+		</ul>
+	</body>
+</html>

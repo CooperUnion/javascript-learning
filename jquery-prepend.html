@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+			
+				$("ul").click(function(){
+
+					$("ul").prepend("<li>Another list item!</li>");
+
+				});
+
+			});
+		</script>
+
+	</head>
+	<body>
+		<ul>
+			<li>A list item</li>
+			<li>A second list item</li>
+		</ul>
+	</body>
+</html>

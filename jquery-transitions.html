@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				$("h1").click(function(){
+					$("h1").toggleClass("fancy");
+				});
+
+			});
+		</script>
+		<style>
+		
+			h1 {
+				width:200px;
+				height:200px;
+				background-color:orange;
+				-webkit-transition:width 1s, background-color 5s;
+			}
+			
+			.fancy {
+				width:400px;
+				background-color:yellow;
+			}
+		
+		</style>
+	</head>
+	<body>
+		<h1>Click on me</h1>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("h1").click(function(){
+
+					var cssStyle = {
+						"color":"green",
+						"backgroundColor":"blue"
+					};
+
+					$("h1").css(cssStyle);
+
+				});
+			});
+		</script>
+
+
+	</head>
+	<body>
+		<h1>Click on me</h1>
+	</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+				$("h1").click(function(){
+
+					$("h1").css("color", "green");
+
+				});
+				
+				$("h2").click(function(){
+
+					var textColor= $("h1").css("color");
+					console.log(textColor);
+				
+					var size= $("h1").css("fontSize");
+					console.log(size);
+										
+
+				});
+
+				
+			});
+		</script>
+
+	</head>
+	<body>
+		<h1>Click on me</h1>
+		<h2>Click on me</h2>
+
+	</body>
+</html>
