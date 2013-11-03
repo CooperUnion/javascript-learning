@@ -6,8 +6,19 @@
 		<script>
 			$(document).ready(function(){
 
-				$.get("data.json", function(data){
-					alert(data);
+				$.ajax({
+				    url: "data.json",
+				 
+				    // the name of the callback parameter, as specified by the YQL service
+				    jsonp: "callback",
+				 
+				    // tell jQuery we're expecting JSONP
+				    dataType: "jsonp",
+				 
+				    // work with the response
+				    success: function( response ) {
+				        console.log( response ); // server response
+				    }
 				});
 
 			});
