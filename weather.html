@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Weather API</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+				
+			$(document).ready(function(){
+				
+				//set up an empty api object to store all of your information in
+				var api = {};
+
+				//set specific properties
+					api.key = "02b9b4c2b7dae068";
+					api.state = "NY";
+					api.city = "Brooklyn";
+					api.hourly = "http://api.wunderground.com/api/"+api.key+"/hourly/q/"+api.state+"/"+api.city+".json";
+					api.conditions = "http://api.wunderground.com/api/"+api.key+"/conditions/q/"+api.state+"/"+api.city+".json";
+			
+				//take a look at the object by using console.log(api)
+
+
+				//Request data remotely from the api
+				//note that the url parameter uses one of the urls stored in the api object
+				$.ajax({
+				  type: 'GET',
+				  dataType: 'jsonp',
+				  url: api.conditions,
+				  success: function(response){
+
+				  	//here's where all of your fun code goes!
+						//the variable "response" is now a json object containing all of your results
+						console.log(response);
+
+						//example of outputting the current temp
+						$('#temperature').append(response.current_observation.feelslike_f + " degrees f");
+
+				  }
+				});
+							
+			});
+			
+		</script>
+	</head>
+	<body>	
+		<h1 id="output">What's the weather like today?</h1>
+		<div id="temperature"></div>
+	</body>
+</html>
