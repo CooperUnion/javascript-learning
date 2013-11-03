@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>jQuery Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				$.get("data.json", function(data){
+					alert(data);
+				});
+
+			});
+		</script>
+		<style>
+			.on {
+				background-color:yellow;
+			}
+		</style>
+	</head>
+	<body>
+	<h1>Hi</h1>
+	</body>
+</html>
