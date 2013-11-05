@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Weather API</title>
@@ -14,11 +14,14 @@
 					api.key = "02b9b4c2b7dae068";
 					api.state = "NY";
 					api.city = "Brooklyn";
+
+				//use string concatenation to create the full url
+				//http://api.wunderground.com/api/asdfadsf1234/hourly/q/NY/Brooklyn.json
 					api.hourly = "http://api.wunderground.com/api/"+api.key+"/hourly/q/"+api.state+"/"+api.city+".json";
 					api.conditions = "http://api.wunderground.com/api/"+api.key+"/conditions/q/"+api.state+"/"+api.city+".json";
 			
 				//take a look at the object by using console.log(api)
-
+				console.log(api);
 
 				//Request data remotely from the api
 				//note that the url parameter uses one of the urls stored in the api object
