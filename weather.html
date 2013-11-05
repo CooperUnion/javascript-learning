@@ -37,7 +37,8 @@
 
 						//example of outputting the current temp
 						$('#temperature').append(response.current_observation.feelslike_f + " degrees f");
-
+						var imageTag = '<img src="'+response.current_observation.icon_url+'"/>';
+						$('#temperature').append(imageTag);
 				  }
 				});
 							
