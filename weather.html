@@ -7,6 +7,9 @@
 				
 			$(document).ready(function(){
 				
+				var dateTime = new Date();
+				var currentEpoch = dateTime.getTime(); //http://en.wikipedia.org/wiki/Unix_time
+				
 				//set up an empty api object to store all of your information in
 				var api = {};
 
@@ -37,7 +40,11 @@
 
 						//example of outputting the current temp
 						$('#temperature').append(response.current_observation.feelslike_f + " degrees f");
-
+						var imageTag = '<img src="'+response.current_observation.icon_url+'"/>';
+						$('#temperature').append(imageTag);
+						
+						var whenTempWasTaken = parseInt(currentEpoch/1000) - parseInt(response.current_observation.observation_epoch);
+						console.log("Temperature reading is " + whenTempWasTaken + " seconds old.");
 				  }
 				});
 							
