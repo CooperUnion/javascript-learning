@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter Search</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+				var url = 'http://cooper-union-search-proxy.herokuapp.com/twitter/search/Cooper%20Union';
+				$.get(url, function(response){
+					
+					//response.statuses contains all of the tweets
+					//response.search_metadata contains information about the search
+					console.log(response);
+
+					$.each(response.statuses, function(index, status){
+						console.log(status);
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>	
