@@ -21,13 +21,13 @@
 					$.each(response.statuses, function(index, status){
 					
 						//if the result contained the word cat
-						if(status.text.search("cat")>0) {
+						if(status.text.search("cat")>=0) {
 							//add 1 to the cat counter
 							cats++;
 							
 						}
 						//if the result contained the word dog
-						if(status.text.search("dog")>0) {
+						if(status.text.search("dog")>=0) {
 							//add 1 to the dog counter
 							dogs++;
 						}
@@ -35,14 +35,39 @@
 						//if we're on the last item
 						if(index == (response.statuses.length-1)) {
 							//our counting is done, let's do something with this
-							console.log("cats: "+cats, "dogs: "+dogs)
+							console.log("cats: "+cats, "dogs: "+dogs);
+							$("#cats").css("height",cats*2)
+							$("#dogs").css("height",dogs*2)							
 						}
 					});
 				});
 			});
 		</script>
+		<style>
+			
+			#cats, #dogs {
+				width:200px;
+			}
+			
+			#cats {
+				background-color:green;
+			}
+			
+			#dogs {
+				background-color:blue;
+			}
+			
+			.container div {
+				float:left;
+			}
+			
+		</style>
+	
 	</head>
 	<body>
-		<div class="container"></div>
+		<div class="container">
+			<div id="cats"></div>
+			<div id="dogs"></div>
+		</div>
 	</body>
 </html>	
