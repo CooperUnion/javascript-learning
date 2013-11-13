@@ -31,7 +31,12 @@
 						console.log(status);
 						
 						//create some output
-						var output = "<p>"+status.text+"</p>";
+						//creates something like '<p>Hello tweet!</p>'
+						var output = '<p>'+status.text+'</p>';
+						
+						//alternate example
+						//creates something like '<p class="tweet" id="tweet-1">Hello tweet!</p>'
+						//var output = '<p class="tweet" id="tweet-'+index+'">'+status.text+'</p>';	
 						
 						//find the item with a class of "container"
 						//append the output html
