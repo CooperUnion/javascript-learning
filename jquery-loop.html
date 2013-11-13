@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter Search</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+				var url = 'http://cooper-union-search-proxy.herokuapp.com/twitter/search/Cooper%20Union';
+				$.get(url, function(response){
+					
+					//response.statuses contains all of the tweets
+					//response.search_metadata contains information about the search
+					console.log(response);
+
+		
+					//loop through each response, and do something to each one
+					/*
+						Once inside the loop, each item from what you're looping through
+						becomes a variable called "status", which is available to use,
+						but changes each iteration through the loop.	
+						
+						The "index"	variable contains the current number of item 
+						that you are looping through, starting with index=0;
+					*/
+					
+					$.each(response.statuses, function(index, status){
+						//this is inside of your loop
+						//status and index are now variables you can use
+						//status is object representing an individual tweet
+						
+						console.log(status);
+						
+						//create some output
+						var output = "<p>"+status.text+"</p>";
+						
+						//find the item with a class of "container"
+						//append the output html
+						$(".container").append(output);
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+		
+		</div>
+	</body>
+</html>	

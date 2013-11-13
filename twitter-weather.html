@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter API</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+				
+			$(document).ready(function(){
+					//set up an empty api object to store all of your information in
+				var api = {};
+				api.url = "http://cooper-union-search-proxy.herokuapp.com/twitter/search/coffee";
+
+
+				//Request data remotely from the api
+				//note that the url parameter uses one of the urls stored in the api object
+				$.ajax({
+				  type: 'GET',
+				  dataType: 'json',
+				  url: api.url,
+				  success: function(response){
+
+				 	console.log(response);
+				 
+				  }
+				});
+							
+			});
+			
+		</script>
+	</head>
+	<body>	
+		<h1 id="output">What's the weather like today?</h1>
+		<div id="temperature"></div>
+	</body>
+</html>
