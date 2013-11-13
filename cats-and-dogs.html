@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Twitter Search</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+			
+				//get the most recent 100 tweets that contained "cat" or "dog"
+				var url = 'http://cooper-union-search-proxy.herokuapp.com/twitter/search/cat%20OR%20dog?count=100';
+				$.get(url, function(response){
+					
+					//start counting at 0
+					var cats = 0;
+					var dogs = 0;
+					
+					//know how many results you received
+					var limit = response.statuses.length;
+					
+					//loop through each result
+					$.each(response.statuses, function(index, status){
+					
+						//if the result contained the word cat
+						if(status.text.search("cat")>0) {
+							//add 1 to the cat counter
+							cats++;
+							
+						}
+						//if the result contained the word dog
+						if(status.text.search("dog")>0) {
+							//add 1 to the dog counter
+							dogs++;
+						}
+					
+						//if we're on the last item
+						if(index == (response.statuses.length-1)) {
+							//our counting is done, let's do something with this
+							console.log("cats: "+cats, "dogs: "+dogs)
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container"></div>
+	</body>
+</html>	
