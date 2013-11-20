@@ -15,7 +15,7 @@
 				// Relevant part: 0AuRlIp074IL7dFBDNnFacFdTQVlrc0JUcFI1MG1DVHc
 				//Step 4: Paste below in 'spreadsheetKey' variable
 
-				var spreadsheetKey = '0AuRlIp074IL7dFBDNnFacFdTQVlrc0JUcFI1MG1DVHc';
+				var spreadsheetKey = '0AuRlIp074IL7dFQtbm9mNUZIeVU4Vy1NbHRvS2ViVmc';
 				var url = 'https://spreadsheets.google.com/feeds/cells/'+spreadsheetKey+'/1/public/basic?alt=json-in-script';
 
 				$.ajax({
@@ -24,8 +24,16 @@
 				  url: url,
 				  success: function(response){
 
+
+					
+
 						$.each(response.feed.entry, function(index, row){
-							console.log(row.content.$t);
+					
+							//ignore timestamps that begin with '11'
+							if(row.content.$t.search("11")<0) {
+								console.log(row.content.$t);
+							}
+
 						});
 				  }
 				});
