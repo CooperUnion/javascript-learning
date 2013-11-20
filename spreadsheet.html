@@ -24,14 +24,17 @@
 				  url: url,
 				  success: function(response){
 
-
-					
-
 						$.each(response.feed.entry, function(index, row){
 					
 							//ignore timestamps that begin with '11'
-							if(row.content.$t.search("11")<0) {
-								console.log(row.content.$t);
+
+							if(row.title.$t.substring(0,1) != "A") {
+								var text = row.content.$t;
+								var title = row.title.$t;
+						
+								if(title != "B1") {
+									console.log(row.content.$t);
+								}
 							}
 
 						});
