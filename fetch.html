@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Storage</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+		
+				var people = [
+					{"name":"Alex Pardee","tag":"alex-pardee"}
+				];
+			
+			
+				$.ajax({
+						  type: 'GET',
+						  dataType:'jsonp',
+						  url: "http://ajax.googleapis.com/ajax/services/feed/load?v=1.0&q=http://www.juxtapoz.com/tag/banksy/feed/rss",
+						  success:function(response){
+						  	var entries = response.responseData.feed.entries;
+						  	$.each(entries, function(index, entry) {
+						  		$("<li>link " + entry.link+ "</li>").appendTo("ul");
+						  	});
+						  }
+				});
+		
+			});
+		</script>
+	</head>
+	<body>
+		<ul>
+		</ul>
+	</body>
+</html>
