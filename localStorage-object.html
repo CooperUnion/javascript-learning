@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Storage</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+		
+				//give me a random number from 0-100
+				var randomNumber = Math.floor(Math.random()*100);
+				
+				//give me a random number from 0 - 0.999999999
+				var randomValue = Math.random();
+				
+				//try to get the stored object
+				var numbers = localStorage.getItem("numbers");
+				
+				if(numbers === null){
+					//if it doesn't exist, create it			
+					console.log("not an array, creating one");
+					numbers = {};
+				} else {
+					//if it exists, convert the string to an object
+					console.log("numbers is an object");
+					numbers = JSON.parse(numbers);
+				}
+				
+				//add a random key, and the random value to it
+				numbers[randomNumber] = randomValue;
+
+				//convert the object into a string, and store it
+				localStorage.setItem("numbers", JSON.stringify(numbers));
+				
+				console.log(numbers);
+			});
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
