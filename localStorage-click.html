@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Storage</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				$("#set").click(function(){
+					localStorage.setItem("hello","hi there " + Math.floor(Math.random()*100));
+					console.log("set some data");
+				});
+
+				$("#get").click(function(){
+					var result = localStorage.getItem("hello");
+					console.log("stored in localStorage:", result);
+				});
+				
+				$("#erase").click(function(){
+					localStorage.removeItem("hello");
+					console.log("erased data");
+				});				
+
+			});
+		</script>
+	</head>
+	<body>
+	
+		<ul>
+			<li id="set">set</li>
+			<li id="get">get</li>
+			<li id="erase">erase</li>
+		</ul>
+	
+	</body>
+</html>

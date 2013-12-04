@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Storage</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				//create an item called "hello" with a value of "hi there"
+				localStorage.setItem("hello","hi there");
+				
+				//retrieve the item called "hello"
+				var test = localStorage.getItem("hello");
+				
+				//view the results
+				console.log(test);
+			
+			});
+		</script>
+	</head>
+	<body>
+	
+	</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Local Storage</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function(){
+		
+				//create a function that adds css to show something
+				var showSomething = function(){
+				
+					$("#something").css({
+						"width":"500",
+						"height":"500",
+						"backgroundColor":"orange"
+					});
+					
+				};
+				
+				//create a function to hide something
+				var hideSomething = function(){
+					$("#something").hide();
+				};
+
+				//set up a click event to show somehting
+				$("#show").click(function(){
+				
+					//store the value
+					localStorage.setItem("something","visible");
+					console.log("set the value to 'visible'");
+					
+					//run the showSomething function
+					showSomething();
+
+				});
+
+				//set up a click event to hide somehting
+				$("#hide").click(function(){
+				
+					//remove the item that was stored
+					localStorage.removeItem("something");
+					console.log("removed item");
+					
+					//run the hideSomething function
+					hideSomething();
+					
+				});
+				
+				//find out if something should be shown
+				var somethingState = localStorage.getItem("something");
+				if(somethingState === "visible") {
+
+					//show something!
+					showSomething();
+				} 
+				
+				
+
+
+				
+			});
+		</script>
+	</head>
+	<body>
+		<ul>
+			<li id="show">show something</li>
+			<li id="hide">hide something</li>
+		</ul>
+		<div id="something"></div>
+	</body>
+</html>
