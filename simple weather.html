@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      $.getJSON("http://cooper-union-weather-proxy.herokuapp.com/weather/NY/Manhattan", function(response){
+        console.log(response);
+
+        //example of outputting the current temp
+        $('#temperature').append(response.current_observation.feelslike_f + " degrees f");
+
+        //create image tag
+        var imageTag = '<img src="'+response.current_observation.icon_url+'" />';
+
+        //append image tag to #temperature
+        $('#temperature').append(imageTag);
+
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="temperature"></div>
+
+  </body>
+</html>
