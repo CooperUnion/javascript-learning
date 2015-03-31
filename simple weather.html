@@ -3,11 +3,25 @@
   <head>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-      $.getJSON("http://cooper-union-weather-proxy.herokuapp.com/weather/NY/Manhattan", function(response){
+
+
+      var state = prompt("What state do you want to find out about the weather in?");
+      var city = prompt("How about a city?");
+
+      $.getJSON("http://cooper-union-weather-proxy.herokuapp.com/weather/" + state + "/" + city, function(response){
         console.log(response);
 
         //example of outputting the current temp
-        $('#temperature').append(response.current_observation.feelslike_f + " degrees f");
+
+        var currentTemp = response.current_observation.feelslike_f;
+
+        if(currentTemp > 47) {
+          $("#temperature").append("It is warm out! ");
+        } else {
+          $("#temperature").append("It is cold out! ");
+        }
+
+        $("#temperature").append(response.current_observation.feelslike_f + " degrees f");
 
         //create image tag
         var imageTag = '<img src="'+response.current_observation.icon_url+'" />';
