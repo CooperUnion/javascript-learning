@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+      var map;
+      var initialize = function() {
+        var mapOptions = {
+          zoom: 19,
+          center: new google.maps.LatLng(40.7293, -73.9906)
+        };
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+        var myLatlng = new google.maps.LatLng(40.7293, -73.9906);
+
+
+        var positions = [
+          new google.maps.LatLng(40.7291, -73.9906),
+          new google.maps.LatLng(40.72875, -73.9908),
+          new google.maps.LatLng(40.7287, -73.99025)
+        ];
+
+
+        var markers = [];
+        //create all of the markers on the map
+        for (position in positions) {
+
+          // To add the marker to the map, use the 'map' property
+          markers[position] = new google.maps.Marker({
+              position: positions[position],
+              map: map,
+              title:"Hello World " + Math.floor(Math.random() * 100),
+              // icon: 'http://placehold.it/24x50' //url to images
+          });
+
+        }
+
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>

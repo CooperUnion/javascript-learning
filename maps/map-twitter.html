@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+    <script>
+
+      $(document).ready(function(){
+
+        var mapOptions = {
+          zoom: 19,
+          center: new google.maps.LatLng(40.7293, -73.9906)
+        };
+
+        $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/cooper%20union", function(response){
+
+          for (i in response.statuses) {
+            console.log(response.statuses[i].geo)
+          }
+
+        });
+
+
+        var positions = [
+          {
+            'title':'Foundation building',
+            'map': new google.maps.LatLng(40.7291, -73.9906),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'Cooper Square Park',
+            'map':new google.maps.LatLng(40.72875, -73.9908),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'Cooper Union New Building',
+            'map': new google.maps.LatLng(40.7287, -73.99025),
+            'link':'http://cooper.edu'
+          }
+        ];
+
+        draw('map', mapOptions, positions);
+      });
+
+    </script>
+    <style>
+      #map {
+        height:600px;
+        width:800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>

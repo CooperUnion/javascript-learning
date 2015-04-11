@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+      var initialize = function(id) {
+
+        var mapOptions = {
+          zoom: 19,
+          center: new google.maps.LatLng(40.7293, -73.9906)
+        };
+        var map = new google.maps.Map(document.getElementById(id),
+            mapOptions);
+
+        var myLatlng = new google.maps.LatLng(40.7293, -73.9906);
+
+        //More complex positions object
+        //Now with titles, and relevant links
+        var positions = [
+          {
+            'title':'Foundation building',
+            'map': new google.maps.LatLng(40.7291, -73.9906),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'Cooper Square Park',
+            'map':new google.maps.LatLng(40.72875, -73.9908),
+            'link':'http://cooper.edu'
+          },
+          {
+            'title':'Cooper Union New Building',
+            'map': new google.maps.LatLng(40.7287, -73.99025),
+            'link':'http://cooper.edu'
+          }
+        ];
+
+        //set up some empty arrays to use
+        var markers = [];
+        var infoWindows = [];
+        var popUps = [];
+
+        //create all of the markers on the map
+        for (i in positions) {
+
+          // To add the marker to the map, use the 'map' property
+          markers[i] = new google.maps.Marker({
+              position: positions[i].map,
+              map: map,
+              title:"The location of the " + positions[i].title
+              // icon: 'http://placehold.it/24x50' //url to images
+          });
+
+        }
+
+        //loop through the markers, and add pop-up windows to them
+        for (i in markers) {
+
+          //create a template with two placeholder to replace
+          var popUpTemplate = '<div class="content"><a href="{{link}}">{{content}}</a></div>';
+
+          //replace the content placeholder
+          popUps[i] = popUpTemplate.replace('{{content}}', positions[i].title);
+
+          //replace the link placeholder
+          popUps[i] = popUps[i].replace('{{link}}', positions[i].link);
+
+          //create a new info window
+          infoWindows[i] = new google.maps.InfoWindow({
+            //the contents is the string-replaced template we created within this loop
+            content:popUps[i]
+          });
+
+          //when a marker is clicked on
+          google.maps.event.addListener(markers[i], 'click', function(innerKey) {
+            return function() {
+                //comment out the for loop persist each info window
+                for (j in markers) {
+                  infoWindows[j].close(map, markers[j]);
+                }
+
+                //open the infoWindow related to the marker clicked on
+                infoWindows[innerKey].open(map, markers[innerKey]);
+            }
+          }(i));
+        }
+      } //end of the initiazlize function
+
+      $(document).ready(function(){
+        $('body').html("<div id=test></div>");
+        $('#test').css({
+          'height':'600px',
+          'width':'<600></600>px',
+          'margin':0,
+          'padding':0
+        });
+        initialize('test');
+        console.log("initialize ran");
+
+
+      });
+
+      // google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

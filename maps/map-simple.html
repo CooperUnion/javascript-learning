@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+
+      //set up the google map
+      var map;
+
+      //create a function that runs when the page is ready
+      var initialize = function() {
+        //set some default options
+        var mapOptions = {
+          zoom: 19, //very close
+          center: new google.maps.LatLng(40.7293, -73.9906) //cooper union
+        };
+
+        //create a new map, and have it populate the #map-canvas html element
+        var map = new google.maps.Map(document.getElementById('map-canvas'),
+            mapOptions);
+
+      }
+
+      //add the map to the page, when the page is ready
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
