@@ -12,7 +12,7 @@
       $(document).ready(function(){
 
         var mapOptions = {
-          zoom: 19,
+          zoom: 18,
           center: new google.maps.LatLng(40.7293, -73.9906)
         };
 
@@ -20,7 +20,8 @@
           {
             'title':'Foundation building',
             'map': new google.maps.LatLng(40.7291, -73.9906),
-            'link':'http://cooper.edu'
+            'link':'http://cooper.edu',
+            'html':'<img src=http://placehold.it/350x150 />'
           },
           {
             'title':'Cooper Square Park',
@@ -31,6 +32,11 @@
             'title':'Cooper Union New Building',
             'map': new google.maps.LatLng(40.7287, -73.99025),
             'link':'http://cooper.edu'
+          },
+          {
+            'title':'Video Games New York',
+            'map': new google.maps.LatLng(40.7278926,-73.99058),
+            'link':'http://www.videogamesnewyork.com/'
           }
         ];
 
@@ -42,7 +48,7 @@
     </script>
         <style>
       #map {
-        height:600px;
+        height:800px;
         width:800px;
       }
     </style>
