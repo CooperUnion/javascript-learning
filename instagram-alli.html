@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/nyc?max_tag_id=0&count=30", function(response){
+
+
+        console.log(response)
+        var media = response.media;
+        var pagination = response.pagination;
+
+        var unique_media = [];
+
+        for(var i = 0; i< media.length; i++) {
+
+          //add all ids to the unique_media array
+          if(media[i].location != null) {
+            unique_media.push(media[i]);
+          }
+        }
+
+        //get the second set of responses
+        var next_tag_url = 'http://cooper-union-instagram-proxy.herokuapp.com/search/tag/nyc?count=30&max_tag_id=' + pagination.next_max_id;
+
+        $.getJSON(next_tag_url, function(next_response){
+
+          var next_media = next_response.media;
+          var next_pagination = next_response.pagination;
+
+          for(var i = 0; i< media.length; i++) {
+
+            //determine if the ID is in the unique_media array
+            if(unique_media.indexOf(next_media[i].id) && (next_media[i].location != null)) {
+              //if it isn't, add it
+              unique_media.push(next_media[i]);
+            }
+
+          }
+
+          
+          console.log(unique_media)
+
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
