@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+
+
+    <script>
+
+      $(document).ready(function(){
+
+        //getting the data from instagram
+        $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/caminorun2015?count=30", function(response){
+
+          //create the placeholders for valid images
+          var instagramPositions = [];
+          var instagramStrip = [];
+
+          //looping through the response from instagram
+          for(var i=0; i<response.length; i++) {
+            // $("body").append("<img src="+response[i].images.thumbnail.url+" />");
+
+            //if the current response has location data
+            if(response[i].location != null) {
+
+              //construct the photoMarker object
+              var photoMarker = {
+                'title': '',
+                'map': new google.maps.LatLng(response[i].location.latitude, response[i].location.longitude),
+
+                'html':"<a href=\""+response[i].link+"\"><img src="+response[i].images.thumbnail.url+" /></a>"
+              }
+
+              //push the photoMarker object onto instagramPositions array
+              instagramPositions.push(photoMarker);
+              instagramStrip.push(photoMarker.html);
+            } //end of "if the photo has location data"
+
+          } //end of the for loop, iterating through the photos
+
+          //set up the map configuration
+          var mapOptions = {
+            zoom: 8,
+            center: new google.maps.LatLng(43.3197516,-0.295187)
+          };
+
+          //draw map
+          draw('map', mapOptions, instagramPositions);
+
+          //output image strip
+          var imageStrip = instagramStrip.join('');
+          $(imageStrip).appendTo("#strip");
+
+        });
+
+      });
+
+    </script>
+    <style>
+      #map {
+        height:800px;
+        width:100%;
+      }
+
+      #content {
+        background-color:rgba(255,255,255,.5);
+      }
+
+      #strip {
+        width:100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>Jonny Santos</h1>
+      <h2>Camino de Santiago, #caminorun2015</h2>
+    </div>
+    <div id="map"></div>
+    <div id="strip"></div>
+  </body>
+</html>
