@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Google Spreadsheet JSON Example</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.3.5/tabletop.min.js"></script>
+		<script>
+			$(document).ready(function(){
+
+				  var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1WRbwEdYAxSvLfBmR6UdYiO1IqfILV_J45qgNdvCoO24/pubhtml';
+
+				  var getData = function () {
+				    Tabletop.init({ 
+				    	"key": public_spreadsheet_url,
+				        "callback": processData,
+				        "simpleSheet": true
+				    });
+				  }
+
+				  var processData = function(data){
+			        	console.log(data);
+			        	for(var i=0; i<data.length; i++) {
+
+			        		$("body").css("backgroundColor", data[i].color);
+
+			        		$("body").append(data[i].color + " ");
+
+			        	}
+			        };
+
+
+				  getData();
+
+
+				
+			});
+		</script>
+		<style>
+		.dogs {
+			background-color:green;
+		}
+
+		.cats {
+			background-color:orange;
+		}
+
+		</style>
+
+	</head>
+	<body>
+	</body>
+</html>	
