@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+      $(document).ready(function(){
+
+        //get the url from the cooper-union-youtube-proxy
+        var url = 'http://www.youtube.com/watch?v=JAUoeqvedMo&feature=youtube_gdata';
+
+        //get just the part of the url we care about: JAUoeqvedMo
+        var parts = url.split('=');
+        var segment = url.split('=')[1].split('&')[0];
+        console.log(segment);
+
+        var embed = '<iframe src="http://www.youtube.com/embed/'+segment+'" width="560" height="315" frameborder="0" allowfullscreen></iframe>'
+
+        console.log(embed);
+
+        $("body").append(embed);
+
+      });
+
+    </script>
+  <body>
+  </body>
+</html>
