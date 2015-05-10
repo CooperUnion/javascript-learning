@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Form data</title>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script>
+		
+			$(document).ready(function(){
+
+				$( "form" ).submit(function( event ) {
+				  event.preventDefault();
+				  console.log($("#cityName").val())
+				});
+
+			});
+
+		</script>
+		<style>
+			body {
+				background-color:gainsboro;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Form data example</h1>
+		<form>
+			<input id="cityName" type="text" name="city" />
+			<input id="submitButton" type="submit" />
+		</form>
+	</body>
+</html>
