@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+
+
+      $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/cooper%20union?count=100", function(response){
+
+        console.log("There are " + response.statuses.length + " tweets");
+
+        for(var i=0; i<response.statuses.length; i++) {
+          // console.log(response.statuses[i].text);
+
+          var retweet_count = response.statuses[i].retweet_count;
+          var favorite_count = response.statuses[i].favorite_count;
+
+          if(retweet_count > 0) {
+            // console.log("This tweet was retweeted!");
+          }
+
+          if(favorite_count > 0) {
+            // console.log("This tweet was favorited!");
+          }
+
+          if((retweet_count > 0) && (favorite_count>0)) {
+            console.log(response.statuses[i].text);
+          } else {
+            console.log("boring tweet " + response.statuses[i].text);
+          }
+
+
+        }
+
+
+
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="temperature"></div>
+
+  </body>
+</html>
