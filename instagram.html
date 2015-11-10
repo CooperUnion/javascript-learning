@@ -3,15 +3,21 @@
   <head>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-      $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/nyc", function(response){
+    $(document).ready(function(){
 
+      $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/cooperunion", function(response){
+        console.log(response[0].user.full_name);
 
-        console.log(response);
         for(var i=0; i<response.length; i++) {
-          $("body").append("<img src="+response[i].images.thumbnail.url+" />");
+
+          // $("body").append("<img src="+response[i].images.thumbnail.url+" />");
+          $("<img>").attr("src", response[i].images.thumbnail.url).appendTo("body");
         }
 
       });
+
+    });
+
     </script>
   </head>
   <body>
