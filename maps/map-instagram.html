@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+    <script>
+
+      $(document).ready(function(){
+        $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/cooperunion", function(response){
+
+            var img = "<img src=" + response[0].images.thumbnail.url + " />";
+
+            console.log(response[1]);
+
+            var mapOptions = {
+              zoom: 18,
+              center: new google.maps.LatLng(40.7293, -73.9906)
+            };
+
+            var positions = [
+              {
+                'title':response[1].location.name,
+                'map': new google.maps.LatLng(response[1].location.latitude, response[1].location.longitude),
+                'link':'http://cooper.edu',
+                'html':img
+              }
+            ];
+
+            draw('map', mapOptions, positions);
+
+
+        });
+
+      });
+
+      // google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+        <style>
+      #map {
+        height:800px;
+        width:800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
