@@ -5,103 +5,146 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
       $(function(){
+        var start = new Date();
+
         console.log(Math.floor(Math.random()*40000));
 
-        var img = new Image();
-            img.src = 'erin.jpg';
+        var pickAndRemoveRandomProperty = function(obj) {
+            var result;
+            var count = 0;
+            for (var prop in obj)
+                if (Math.random() < 1/++count)
+                   result = prop;
+            cache = obj[result];
+            delete obj[result];
+            return cache;
+        };
 
-        var canvas = document.createElement('canvas');
-            canvas.setAttribute('id', 'input');
-            canvas.setAttribute('width', 200);
-            canvas.setAttribute('height', 200);
+        var randomProperty = function (obj) {
+            var keys = Object.keys(obj)
 
-        var output = document.createElement('canvas');
-            output.setAttribute('id', 'output');
-            output.setAttribute('width', 200);
-            output.setAttribute('height', 200);
+            var result = keys[ keys.length * Math.random() << 0];
+            cache = obj[result];
+            delete obj[result];
+            return cache;
+        };
 
-        document.body.insertBefore(canvas, document.body.childNodes[0]);
-        document.body.insertBefore(output, document.body.childNodes[1]);
+        var generateCoordinatePairs = function() {
+          var randomCoords = {};
 
-        img.onload = function(){
+          var globalCounter = 0;
+          var loopCounter = 0;
+          for(var i=0; i<200; i++) {
+            if(loopCounter < 200) {
+              for(var j=0; j<200; j++) {
+                randomCoords[globalCounter] = [i,j];
+                globalCounter++;
+              }
+              loopCounter++
+
+            } else {
+              loopCounter = 0;
+              for(var j=0; j<200; j++) {
+                randomCoords[globalCounter] = [i,j];
+                globalCounter++;
+              }
+              loopCounter++;
+            }
+          }
+          return randomCoords;
+        };
+
+        function shuffle(array) {
+          var currentIndex = array.length, temporaryValue, randomIndex ;
+
+          // While there remain elements to shuffle...
+          while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+          }
+
+          return array;
+        };
+
+        var generateIndex = function(){
+          var globalIndex = [];
+          for(var i=0;i<40000;i++) {
+            globalIndex.push(i);
+          }
+          return shuffle(globalIndex);
+        }
+
+        var processImage = function(){
+
+          var canvas = document.createElement('canvas');
+              canvas.setAttribute('id', 'input');
+              canvas.setAttribute('width', this.width);
+              canvas.setAttribute('height', this.height);
+
+          var output = document.createElement('canvas');
+              output.setAttribute('id', 'output');
+              output.setAttribute('width', this.width);
+              output.setAttribute('height', this.height);
+
+
+
+
           var ctx = canvas.getContext('2d');
           var outputCtx = output.getContext('2d');
 
-              ctx.drawImage(img,0,0,200,200);
-          var imageData = ctx.getImageData(0,199,1,1);
-
-
-
-          var generateCoordinatePairs = function() {
-            var randomCoords = {};
-
-            var globalCounter = 0;
-            var loopCounter = 0;
-            for(var i=0; i<200; i++) {
-              if(loopCounter < 200) {
-                for(var j=0; j<200; j++) {
-                  randomCoords[globalCounter] = [i,j];
-                  globalCounter++;
-                }
-                loopCounter++
-
-              } else {
-                loopCounter = 0;
-                for(var j=0; j<200; j++) {
-                  randomCoords[globalCounter] = [i,j];
-                  globalCounter++;
-                }
-                loopCounter++;
-              }
-            }
-            return randomCoords;
-          }
+              ctx.drawImage(img,0,0,this.width,this.height);
+          // var imageData = ctx.getImageData(0,199,1,1);
 
           var randomInputCoords = generateCoordinatePairs();
           var randomOutputCoords = generateCoordinatePairs();
 
-          function pickAndRemoveRandomProperty(obj) {
-              var result;
-              var count = 0;
-              for (var prop in obj)
-                  if (Math.random() < 1/++count)
-                     result = prop;
-              cache = obj[result];
-              delete obj[result];
-              return cache;
-          }
+
 
           // var inputNum = pickAndRemoveRandomProperty(randomInputCoords);
           // var outputNum = pickAndRemoveRandomProperty(randomOutputCoords);
           // console.log(inputNum, outputNum, randomInputCoords, randomOutputCoords);
           // console.log(randomInputCoords);
-          for(var i = 0; i<40000; i++) {
-            var randomInput = pickAndRemoveRandomProperty(randomInputCoords);
-            var randomInputX = randomInput[0] +1;
-            var randomInputY = randomInput[1] +1;
 
-            var randomOutput = pickAndRemoveRandomProperty(randomOutputCoords);
-            var randomOutputX = randomOutput[0];
-            var randomOutputY = randomOutput[1];
+          // for(var i = 0; i<40000; i++) {
+          //   var randomInput = randomProperty(randomInputCoords);
+          //   var randomInputX = randomInput[0] +1;
+          //   var randomInputY = randomInput[1] +1;
+          //
+          //   var randomOutput = randomProperty(randomOutputCoords);
+          //   var randomOutputX = randomOutput[0];
+          //   var randomOutputY = randomOutput[1];
+          //
+          //   var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
+          //
+          //   var imageData = ctx.getImageData(v1,v2,1,1);
+          //
+          //   var outputCtx = output.getContext('2d');
+          //       outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
+          //
+          // }
 
-            // console.log(randomInput, randomInputX, randomInputY);
-            // console.log(randomOutput, randomOutputX, randomOutputY);
-            var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
-            // console.log(v1, v2, v3, v4)
+          document.body.insertBefore(canvas, document.body.childNodes[0]);
+          document.body.insertBefore(output, document.body.childNodes[1]);
 
-            var imageData = ctx.getImageData(0,199,v1,v2);
+          var time = new Date() - start;
+          console.log(time/1000 + " seconds to execute");
 
-            var outputCtx = output.getContext('2d');
-                outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
-
-
-          }
-
-        };
+        }; //end image.onload
 
 
 
-      })
+        var img = new Image();
+            img.src = 'erin.jpg';
+            img.onload = processImage;
+
+      });
     </script>
   </head>
   <body>
