@@ -66,10 +66,13 @@
 
 
             $.each(this, function(i, img){
-              $(img).hide();
-
-
-
+              $img = $(img);
+              var wrapper = $("<div>").attr({
+                id:"canvasScramble"+i,
+                class:"canvasScramble"
+              });
+              $img.hide().wrap(wrapper);
+              $img.detach();
               img.onload = function(){
 
                 var canvas = document.createElement('canvas');
@@ -83,7 +86,6 @@
                     output.setAttribute('height', this.height);
 
                 var totalPixels = this.width * this.height;
-                console.log(totalPixels)
 
                 var ctx = canvas.getContext('2d');
                 var outputCtx = output.getContext('2d');
@@ -95,12 +97,12 @@
                 var randomInputIndex = generateRandomIndex(totalPixels);
                 var randomOutputIndex = generateRandomIndex(totalPixels);
 
-                for(var i = 0; i<totalPixels; i++) {
-                  var randomInput = randomInputCoords[randomInputIndex[i]];
+                for(var j = 0; j<totalPixels; j++) {
+                  var randomInput = randomInputCoords[randomInputIndex[j]];
                   var randomInputX = randomInput[0] +1;
                   var randomInputY = randomInput[1] +1;
 
-                  var randomOutput = randomOutputCoords[randomOutputIndex[i]];
+                  var randomOutput = randomOutputCoords[randomOutputIndex[j]];
                   var randomOutputX = randomOutput[0];
                   var randomOutputY = randomOutput[1];
 
@@ -113,21 +115,26 @@
 
                 }
 
-                document.body.insertBefore(canvas, document.body.childNodes[0]);
-                document.body.insertBefore(output, document.body.childNodes[1]);
+                if(options && options.hasOwnProperty("displayInput") && (options.displayInput === true)) {
+                  $("#canvasScramble"+i).append(canvas);
+                }
+                $("#canvasScramble"+i).append(output);
 
-                var time = new Date() - start;
-                console.log(time/1000 + " seconds to execute");
+
+                if(options && options.hasOwnProperty("debug") && (options.debug === true)) {
+                  var time = new Date() - start;
+                  console.log(time/1000 + " seconds to process #canvasScramble" + i);
+                }
 
               }
-            });
+            }); //end each
 
           } //end $.fn.canvasScramble
 
         })(jQuery);
 
 
-        $("img").canvasScramble();
+        $("img").canvasScramble({debug:true,displayInput:true});
 
       });
     </script>
