@@ -7,116 +7,129 @@
       $(function(){
         var start = new Date();
 
-        var generateCoordinatePairs = function() {
-          var randomCoords = {};
+        (function($){
 
-          var globalCounter = 0;
-          var loopCounter = 0;
-          for(var i=0; i<200; i++) {
-            if(loopCounter < 200) {
-              for(var j=0; j<200; j++) {
-                randomCoords[globalCounter] = [i,j];
-                globalCounter++;
-              }
-              loopCounter++
+        	$.fn.canvasScramble = function(options) {
 
-            } else {
-              loopCounter = 0;
-              for(var j=0; j<200; j++) {
-                randomCoords[globalCounter] = [i,j];
-                globalCounter++;
+
+            var generateCoordinatePairs = function() {
+              var randomCoords = {};
+
+              var globalCounter = 0;
+              var loopCounter = 0;
+              for(var i=0; i<200; i++) {
+                if(loopCounter < 200) {
+                  for(var j=0; j<200; j++) {
+                    randomCoords[globalCounter] = [i,j];
+                    globalCounter++;
+                  }
+                  loopCounter++
+
+                } else {
+                  loopCounter = 0;
+                  for(var j=0; j<200; j++) {
+                    randomCoords[globalCounter] = [i,j];
+                    globalCounter++;
+                  }
+                  loopCounter++;
+                }
               }
-              loopCounter++;
+              return randomCoords;
+            };
+
+            var shuffle = function(array) {
+              var currentIndex = array.length, temporaryValue, randomIndex ;
+
+              // While there remain elements to shuffle...
+              while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+              }
+
+              return array;
+            };
+
+            var generateRandomIndex = function(){
+              var globalIndex = [];
+              for(var i=0;i<40000;i++) {
+                globalIndex.push(i);
+              }
+              return shuffle(globalIndex);
             }
-          }
-          return randomCoords;
-        };
-
-        var shuffle = function(array) {
-          var currentIndex = array.length, temporaryValue, randomIndex ;
-
-          // While there remain elements to shuffle...
-          while (0 !== currentIndex) {
-
-            // Pick a remaining element...
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex -= 1;
-
-            // And swap it with the current element.
-            temporaryValue = array[currentIndex];
-            array[currentIndex] = array[randomIndex];
-            array[randomIndex] = temporaryValue;
-          }
-
-          return array;
-        };
-
-        var generateRandomIndex = function(){
-          var globalIndex = [];
-          for(var i=0;i<40000;i++) {
-            globalIndex.push(i);
-          }
-          return shuffle(globalIndex);
-        }
-
-        var processImage = function(){
-
-          var canvas = document.createElement('canvas');
-              canvas.setAttribute('id', 'input');
-              canvas.setAttribute('width', this.width);
-              canvas.setAttribute('height', this.height);
-
-          var output = document.createElement('canvas');
-              output.setAttribute('id', 'output');
-              output.setAttribute('width', this.width);
-              output.setAttribute('height', this.height);
-
-          var ctx = canvas.getContext('2d');
-          var outputCtx = output.getContext('2d');
-
-              ctx.drawImage(img,0,0,this.width,this.height);
-
-          var randomInputCoords = generateCoordinatePairs();
-          var randomOutputCoords = generateCoordinatePairs();
-          var randomInputIndex = generateRandomIndex();
-          var randomOutputIndex = generateRandomIndex();
-
-          for(var i = 0; i<40000; i++) {
-            var randomInput = randomInputCoords[randomInputIndex[i]];
-            var randomInputX = randomInput[0] +1;
-            var randomInputY = randomInput[1] +1;
-
-            var randomOutput = randomOutputCoords[randomOutputIndex[i]];
-            var randomOutputX = randomOutput[0];
-            var randomOutputY = randomOutput[1];
-
-            var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
-
-            var imageData = ctx.getImageData(v1,v2,1,1);
-
-            var outputCtx = output.getContext('2d');
-                outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
-
-          }
-
-          document.body.insertBefore(canvas, document.body.childNodes[0]);
-          document.body.insertBefore(output, document.body.childNodes[1]);
-
-          var time = new Date() - start;
-          console.log(time/1000 + " seconds to execute");
-
-        }; //end image.onload
 
 
+            $.each(this, function(i, img){
+              $(img).hide();
+              
+              img.onload = function(){
 
-        var img = new Image();
-            img.src = 'erin.jpg';
-            img.onload = processImage;
+                var canvas = document.createElement('canvas');
+                    canvas.setAttribute('id', 'input');
+                    canvas.setAttribute('width', this.width);
+                    canvas.setAttribute('height', this.height);
+
+                var output = document.createElement('canvas');
+                    output.setAttribute('id', 'output');
+                    output.setAttribute('width', this.width);
+                    output.setAttribute('height', this.height);
+
+                var ctx = canvas.getContext('2d');
+                var outputCtx = output.getContext('2d');
+
+                    ctx.drawImage(img,0,0,this.width,this.height);
+
+                var randomInputCoords = generateCoordinatePairs();
+                var randomOutputCoords = generateCoordinatePairs();
+                var randomInputIndex = generateRandomIndex();
+                var randomOutputIndex = generateRandomIndex();
+
+                for(var i = 0; i<40000; i++) {
+                  var randomInput = randomInputCoords[randomInputIndex[i]];
+                  var randomInputX = randomInput[0] +1;
+                  var randomInputY = randomInput[1] +1;
+
+                  var randomOutput = randomOutputCoords[randomOutputIndex[i]];
+                  var randomOutputX = randomOutput[0];
+                  var randomOutputY = randomOutput[1];
+
+                  var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
+
+                  var imageData = ctx.getImageData(v1,v2,1,1);
+
+                  var outputCtx = output.getContext('2d');
+                      outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
+
+                }
+
+                document.body.insertBefore(canvas, document.body.childNodes[0]);
+                document.body.insertBefore(output, document.body.childNodes[1]);
+
+                var time = new Date() - start;
+                console.log(time/1000 + " seconds to execute");
+
+              }
+            });
+
+          } //end $.fn.canvasScramble
+
+        })(jQuery);
+
+
+        $("img").canvasScramble();
 
       });
     </script>
   </head>
   <body>
-    
+    <img src="erin.jpg" />
+    <img src="colors.png" />
+
   </body>
 </html>
