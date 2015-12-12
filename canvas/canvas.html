@@ -12,14 +12,14 @@
         	$.fn.canvasScramble = function(options) {
 
 
-            var generateCoordinatePairs = function() {
+            var generateCoordinatePairs = function(width, height) {
               var randomCoords = {};
 
               var globalCounter = 0;
               var loopCounter = 0;
-              for(var i=0; i<200; i++) {
-                if(loopCounter < 200) {
-                  for(var j=0; j<200; j++) {
+              for(var i=0; i<width; i++) {
+                if(loopCounter < width) {
+                  for(var j=0; j<height; j++) {
                     randomCoords[globalCounter] = [i,j];
                     globalCounter++;
                   }
@@ -27,7 +27,7 @@
 
                 } else {
                   loopCounter = 0;
-                  for(var j=0; j<200; j++) {
+                  for(var j=0; j<height; j++) {
                     randomCoords[globalCounter] = [i,j];
                     globalCounter++;
                   }
@@ -56,9 +56,9 @@
               return array;
             };
 
-            var generateRandomIndex = function(){
+            var generateRandomIndex = function(limit){
               var globalIndex = [];
-              for(var i=0;i<40000;i++) {
+              for(var i=0;i<limit;i++) {
                 globalIndex.push(i);
               }
               return shuffle(globalIndex);
@@ -67,7 +67,9 @@
 
             $.each(this, function(i, img){
               $(img).hide();
-              
+
+
+
               img.onload = function(){
 
                 var canvas = document.createElement('canvas');
@@ -80,17 +82,20 @@
                     output.setAttribute('width', this.width);
                     output.setAttribute('height', this.height);
 
+                var totalPixels = this.width * this.height;
+                console.log(totalPixels)
+
                 var ctx = canvas.getContext('2d');
                 var outputCtx = output.getContext('2d');
 
                     ctx.drawImage(img,0,0,this.width,this.height);
 
-                var randomInputCoords = generateCoordinatePairs();
-                var randomOutputCoords = generateCoordinatePairs();
-                var randomInputIndex = generateRandomIndex();
-                var randomOutputIndex = generateRandomIndex();
+                var randomInputCoords = generateCoordinatePairs(this.width, this.height);
+                var randomOutputCoords = generateCoordinatePairs(this.width, this.height);
+                var randomInputIndex = generateRandomIndex(totalPixels);
+                var randomOutputIndex = generateRandomIndex(totalPixels);
 
-                for(var i = 0; i<40000; i++) {
+                for(var i = 0; i<totalPixels; i++) {
                   var randomInput = randomInputCoords[randomInputIndex[i]];
                   var randomInputX = randomInput[0] +1;
                   var randomInputY = randomInput[1] +1;
@@ -129,7 +134,7 @@
   </head>
   <body>
     <img src="erin.jpg" />
-    <img src="colors.png" />
+    <img src="colors-wide.png" />
 
   </body>
 </html>
