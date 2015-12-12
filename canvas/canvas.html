@@ -104,31 +104,31 @@
 
           var randomInputCoords = generateCoordinatePairs();
           var randomOutputCoords = generateCoordinatePairs();
-
-
+          var randomInputIndex = generateIndex();
+          var randomOutputIndex = generateIndex();
 
           // var inputNum = pickAndRemoveRandomProperty(randomInputCoords);
           // var outputNum = pickAndRemoveRandomProperty(randomOutputCoords);
           // console.log(inputNum, outputNum, randomInputCoords, randomOutputCoords);
           // console.log(randomInputCoords);
 
-          // for(var i = 0; i<40000; i++) {
-          //   var randomInput = randomProperty(randomInputCoords);
-          //   var randomInputX = randomInput[0] +1;
-          //   var randomInputY = randomInput[1] +1;
-          //
-          //   var randomOutput = randomProperty(randomOutputCoords);
-          //   var randomOutputX = randomOutput[0];
-          //   var randomOutputY = randomOutput[1];
-          //
-          //   var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
-          //
-          //   var imageData = ctx.getImageData(v1,v2,1,1);
-          //
-          //   var outputCtx = output.getContext('2d');
-          //       outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
-          //
-          // }
+          for(var i = 0; i<40000; i++) {
+            var randomInput = randomInputCoords[randomInputIndex[i]];
+            var randomInputX = randomInput[0] +1;
+            var randomInputY = randomInput[1] +1;
+
+            var randomOutput = randomOutputCoords[randomOutputIndex[i]];
+            var randomOutputX = randomOutput[0];
+            var randomOutputY = randomOutput[1];
+
+            var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
+
+            var imageData = ctx.getImageData(v1,v2,1,1);
+
+            var outputCtx = output.getContext('2d');
+                outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
+
+          }
 
           document.body.insertBefore(canvas, document.body.childNodes[0]);
           document.body.insertBefore(output, document.body.childNodes[1]);
