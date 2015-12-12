@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Example</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      $(function(){
+        console.log(Math.floor(Math.random()*40000));
+
+        var img = new Image();
+            img.src = 'erin.jpg';
+
+        var canvas = document.createElement('canvas');
+            canvas.setAttribute('id', 'input');
+            canvas.setAttribute('width', 200);
+            canvas.setAttribute('height', 200);
+
+        var output = document.createElement('canvas');
+            output.setAttribute('id', 'output');
+            output.setAttribute('width', 200);
+            output.setAttribute('height', 200);
+
+        document.body.insertBefore(canvas, document.body.childNodes[0]);
+        document.body.insertBefore(output, document.body.childNodes[1]);
+
+        img.onload = function(){
+          var ctx = canvas.getContext('2d');
+          var outputCtx = output.getContext('2d');
+
+              ctx.drawImage(img,0,0,200,200);
+          var imageData = ctx.getImageData(0,199,1,1);
+
+
+
+          var generateCoordinatePairs = function() {
+            var randomCoords = {};
+
+            var globalCounter = 0;
+            var loopCounter = 0;
+            for(var i=0; i<200; i++) {
+              if(loopCounter < 200) {
+                for(var j=0; j<200; j++) {
+                  randomCoords[globalCounter] = [i,j];
+                  globalCounter++;
+                }
+                loopCounter++
+
+              } else {
+                loopCounter = 0;
+                for(var j=0; j<200; j++) {
+                  randomCoords[globalCounter] = [i,j];
+                  globalCounter++;
+                }
+                loopCounter++;
+              }
+            }
+            return randomCoords;
+          }
+
+          var randomInputCoords = generateCoordinatePairs();
+          var randomOutputCoords = generateCoordinatePairs();
+
+          function pickAndRemoveRandomProperty(obj) {
+              var result;
+              var count = 0;
+              for (var prop in obj)
+                  if (Math.random() < 1/++count)
+                     result = prop;
+              cache = obj[result];
+              delete obj[result];
+              return cache;
+          }
+
+          // var inputNum = pickAndRemoveRandomProperty(randomInputCoords);
+          // var outputNum = pickAndRemoveRandomProperty(randomOutputCoords);
+          // console.log(inputNum, outputNum, randomInputCoords, randomOutputCoords);
+          // console.log(randomInputCoords);
+          for(var i = 0; i<40000; i++) {
+            var randomInput = pickAndRemoveRandomProperty(randomInputCoords);
+            var randomInputX = randomInput[0] +1;
+            var randomInputY = randomInput[1] +1;
+
+            var randomOutput = pickAndRemoveRandomProperty(randomOutputCoords);
+            var randomOutputX = randomOutput[0];
+            var randomOutputY = randomOutput[1];
+
+            // console.log(randomInput, randomInputX, randomInputY);
+            // console.log(randomOutput, randomOutputX, randomOutputY);
+            var v1 = randomInputX, v2 = randomInputY, v3 = randomOutputX, v4 = randomOutputY;
+            // console.log(v1, v2, v3, v4)
+
+            var imageData = ctx.getImageData(0,199,v1,v2);
+
+            var outputCtx = output.getContext('2d');
+                outputCtx.putImageData(imageData, v3, v4, 0, 0, 1, 1);
+
+
+          }
+
+        };
+
+
+
+      })
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
