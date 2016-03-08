@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>manipulating html</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+
+      $("ul").click(function(){
+
+        $("ul").prepend("<li>This is another list item!</li>");
+        console.log("the html was replaced!");
+
+      });
+
+    });
+    </script>
+  </head>
+  <body>
+
+    <ul>
+      <li>A list item</li>
+      <li>A second list item</li>
+    </ul>
+
+  </body>
+</html>
