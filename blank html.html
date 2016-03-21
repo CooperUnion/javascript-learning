@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>manipulating html</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+
+        alert("check it out!");
+        $("body").html("<h1>This is dynamically generated html</h1>");
+        $("body").append("<h2>Way less important headline.</h2>");
+
+
+
+
+    });
+    </script>
+  </head>
+  <body>
+    Here is some garbage that you will never see.
+  </body>
+</html>

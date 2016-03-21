@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>if</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+      $(document).ready(function(){
+
+
+        var food = ["apple","pear","banana","pizza"];
+
+        var additionalFood = prompt("What is your super special favorite food?");
+
+        //did the user give us a food that was already in the list?
+
+        var userFoodIndex = food.indexOf(additionalFood);
+        if(userFoodIndex >= 0) {
+          console.log("that food is duplicate");
+        } else {
+          food.push(additionalFood);
+        }
+
+        var someNumber = food.length; //3
+
+        for(var i=0; i<someNumber; i++) {
+          console.log(food[i]); //each item
+          $("ul").append("<li>"+food[i]+"</li>");
+        }
+
+      
+
+
+      })
+    </script>
+  </head>
+  <body>
+
+    <ul>
+
+    </ul>
+
+  </body>
+</html>
