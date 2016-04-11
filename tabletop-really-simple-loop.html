@@ -8,25 +8,18 @@
 		<script>
 			$(document).ready(function(){
 
-					//configure spreadsheet
-				var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1JkcWjoQuUGgPG0sGBx1zu0sDJ8bYSI5J_WHN9lwDK1s/pubhtml';
+				//editable spreadsheet https://docs.google.com/spreadsheets/d/1XjA5v7pOCMGarj-ri10srAUauIdX_RDmwcItzZK0ZuE/edit#gid=816065411
+
+				//configure published spreadsheet
+				var public_spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1XjA5v7pOCMGarj-ri10srAUauIdX_RDmwcItzZK0ZuE/pubhtml';
 
 				getSpreadsheetJSON(public_spreadsheet_url, function(response){
 					console.log(response);
+					for(var i=0; i<response.length; i++) {
 
-					var content = response[0].content;
+						$("body").append("<h2>"+response[i].color+"</h2>");
 
-					// $("body").append("<h1>"+content+"</h1>");
-					// $("h1").css("color", response[0].color)
-					// $("h1").css("backgroundColor", response[0].background)
-					//
-
-						$("body").append("<h1>"+response[0].content+"</h1>").css({
-							"backgroundColor":response[0].background,
-							"fontSize":response[0].size,
-							"color":response[0].color
-						});
-
+					}
 				});
 
 			});
