@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDD3o_vzkcWmw4-yDtuFZ0F4lioqWn8eU8"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+    <script>
+
+      $(document).ready(function(){
+
+        var mapOptions = {
+          zoom: 17,
+          center: new google.maps.LatLng(40.7293827,-73.9894186)
+        };
+
+        var positions = [
+          {
+            'html':"<img width=200 height=150 src=http://manimarketplace.com/images/store/portorico.jpg><br>",
+            'title':'Porto Rico Imports',
+            'map': new google.maps.LatLng(40.7282554,-73.9872602),
+            'link':'http://portorico.com'
+          },
+          {
+            'html':"<img width=200 height=200 src=https://cdn.shopify.com/s/files/1/0102/1582/t/3/assets/logo.png?15760208481907068744><br>",
+            'title':'Mud Spot',
+            'map':new google.maps.LatLng(40.7290324,-73.9866584),
+            'link':'http://onmud.com'
+          },
+          {
+            'html':"<img width=200 height=200 src=https://pbs.twimg.com/profile_images/463795543215308800/aWjYe13J_400x400.jpeg><br>",
+            'title':'Dunkin Donuts',
+            'map': new google.maps.LatLng(40.7290246,-73.9900527),
+            'link':'http://dunkindonuts.com'
+          }
+        ];
+
+        draw('map', mapOptions, positions);
+      });
+
+      // google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+        <style>
+      #map {
+        height:500px;
+        width:800px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Places I like to drink coffee before class</h1>
+    <div id="map"></div>
+  </body>
+</html>

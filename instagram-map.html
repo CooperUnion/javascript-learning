@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDD3o_vzkcWmw4-yDtuFZ0F4lioqWn8eU8"></script>
+    <script src="http://cooper-union-maps-proxy.herokuapp.com/js/draw.js"></script>
+
+    <script>
+      $.getJSON("http://cooper-union-instagram-proxy.herokuapp.com/search/tag/nyc?count=33", function(response){
+
+
+        console.log(response);
+        var howMany = 0;
+        var positionsOfPhotos = [];
+
+        for(var i=0; i<response.length; i++) {
+          // $("body").append("<img src="+response[i].images.thumbnail.url+" />");
+          if((response[i].location) && (response[i].location.latitude !== null)) {
+            howMany++;
+
+            var position = {
+              "title":response[i].caption.text,
+              "map": new google.maps.LatLng(response[i].location.latitude,response[i].location.longitude),
+              "link":response[i].link
+            }
+
+            positionsOfPhotos.push(position);
+          }
+        }
+
+
+
+        console.log(howMany)
+        console.log(positionsOfPhotos)
+
+
+        var mapOptions = {
+          zoom: 10,
+          center: new google.maps.LatLng(40.7293827,-73.9894186)
+        };
+
+
+        draw('map', mapOptions, positionsOfPhotos);
+
+
+      });
+    </script>
+    <style>
+      #map {
+        height:500px;
+        width:800px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+  </body>
+</html>

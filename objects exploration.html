@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript - Objects</title>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+
+			var me = {
+				"first":"erin",
+				"last":"sparling",
+				"employer":["Cooper Union", "Gannett", "Park Slope Food Coop"],
+				"placeOfResidence":"brooklyn",
+				"currentLocation":"Cooper Union"
+			};
+
+			console.log(me);
+
+			var introduction = "My name is " + me.first + " " + me.last + ".";
+			console.log(introduction);
+
+			var sentence = "";
+
+			for (var i = 0; i<me.employer.length; i++) {
+
+				if(i === me.employer.length - 1) {
+					//this only happens during the last item in the list
+					sentence = sentence + " " + me.employer[i] + ".";
+				} else {
+					//this happens for every item in the list
+					sentence = sentence + "I work at " + me.employer[i] + ", and ";
+				}
+
+			}
+
+			$("body").append(sentence)
+		});
+
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>

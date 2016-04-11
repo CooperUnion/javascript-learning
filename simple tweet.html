@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+
+      $.getJSON("http://cooper-union-search-proxy.herokuapp.com/twitter/search/dinner?count=10", function(response){
+        console.log(response.statuses[0].user.profile_image_url);
+
+        $("#tweets").append("<img src=" + response.statuses[0].user.profile_image_url + ">");
+
+
+
+
+      });
+    </script>
+  </head>
+  <body>
+
+    <div id="tweets"></div>
+
+  </body>
+</html>

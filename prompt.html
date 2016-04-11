@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>manipulating html</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <script>
+    $(document).ready(function(){
+
+      // var response = prompt("What is your favorite food?");
+      // console.log(response);
+
+      var age = prompt("How old are you?");
+      var currentYear = 2016;
+      var yearIwasBorn = currentYear - age;
+      console.log(yearIwasBorn);
+
+      var fancyHTML = "<h1>" + yearIwasBorn + "</h1>";
+
+      $("body").html(fancyHTML);
+
+
+    });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>
