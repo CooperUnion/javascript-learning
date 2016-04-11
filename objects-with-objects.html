@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Javascript - Objects</title>
+		<script src="https://code.jquery.com/jquery-latest.min.js"></script>
+		<script>
+
+			$(document).ready(function(){
+
+			var currentEmployer = {
+				"title":"consultant",
+				"organization":"Gannett"
+			}
+
+			var freelanceEmployer = {
+				"title":"adjunct",
+				"organization":"Cooper Union"
+			}
+
+			var volunteerEmployer = {
+				"title":"nerd",
+				"organization":"Park Slope Food Coop"
+			}
+
+			var me = {
+				"first":"erin",
+				"last":"sparling",
+				"employer":[
+					freelanceEmployer,
+					currentEmployer,
+					volunteerEmployer
+				],
+				"placeOfResidence":"brooklyn",
+				"currentLocation":"Cooper Union"
+			};
+
+			var me = {
+				"first":"erin",
+				"last":"sparling",
+				"employer":[
+					{"title":"adjunct","organization":"Cooper Union"},
+					{"title":"nerd","organization":"Park Slope Food Coop"},
+					{"title":"consultant","organization":"Gannett"}
+				],
+				"placeOfResidence":"brooklyn",
+				"currentLocation":"Cooper Union"
+			};
+
+
+			$("body").append(me.employer[0].title);
+
+		});
+
+		</script>
+	</head>
+	<body>
+
+	</body>
+</html>
